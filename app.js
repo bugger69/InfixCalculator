@@ -64,17 +64,17 @@ function solve(s) {
     while(i != s.length){
         if (precedence(s[i]) === -1) {
             s1 += s[i];
-            i++;
         } else if (precedence(s[i]) != - 1) {
             stack1.push(parseFloat(s1));
             s1 = "";
-            if(precedence(s[i]) >= precedence(stack2[stack2.length - 1])){
-                stack2.push(s[i]);
-                i++;
-            } else {
-                // process();
-            }
+            // if(precedence(s[i]) >= precedence(stack2[stack2.length - 1])){
+            //     stack2.push(s[i]);
+            //     i++;
+            // } else {
+            //     process();
+            // }
         }
+        i++;
     }
     stack1.push(parseFloat(s1));
     return stack1[stack1.length - 1];
