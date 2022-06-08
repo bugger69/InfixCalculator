@@ -36,7 +36,7 @@ function precedence(c) {
     }
 }
 
-function solve(s) {
+function solve(s) {//add error handling mechanism too.
     let stack1 = [];
     let stack2 = [];
     let i = 0;
@@ -74,7 +74,7 @@ function solve(s) {
     return stack1[stack1.length - 1];
 }
 
-function process(stack1, stack2) {//do make sure to pass by reference later on.
+function process(stack1, stack2) {
     let b = stack1[stack1.length - 1];
     stack1.pop();
     let a = stack1[stack1.length - 1];
