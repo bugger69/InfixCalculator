@@ -16,12 +16,67 @@ reset.addEventListener('click', () => {
     input.textContent = "";
 });
 
-submit.addEventListener('click', () => {
+submit.addEventListener('click', () => { 
     let s = input.textContent;
     input.textContent = solve(s);
 });
 
+function precedence(c) {
+    switch(c) {
+        case '+':
+            return 1;
+        case '-':
+            return 1;
+        case '*':
+            return 2;
+        case '/':
+            return 2;
+        default:
+            return -1;
+    }
+}
+
+function process() {//do make sure to pass by reference later on.
+    let b = stack1[stack1.length - 1];
+    stack1.pop();
+    let a = stack1[stack1.length - 1];
+    stack1.pop();
+    let c = stack2[stack2.length - 1];
+    stack2.pop();
+    if(c === '+') {
+        stack1.push(a + b);
+    } else if (c === '-') {
+        stack1.push(a - b);
+    } else if (c === '*') {
+        stack1.push(a * b);
+    } else if (c === '/') {
+        stack1.push(a / b);
+    } else {
+        return;
+    }
+}
+
 function solve(s) {
-    return "";
+    let stack1 = [];
+    let stack2 = [];
+    let i = 0;
+    let s1 = "";
+    while(i != s.length){
+        if (precedence(s[i]) === -1) {
+            s1 += s[i];
+            i++;
+        } else if (precedence(s[i]) != - 1) {
+            stack1.push(parseFloat(s1));
+            s1 = "";
+            if(precedence(s[i]) >= precedence(stack2[stack2.length - 1])){
+                stack2.push(s[i]);
+                i++;
+            } else {
+                // process();
+            }
+        }
+    }
+    stack1.push(parseFloat(s1));
+    return stack1[stack1.length - 1];
 }
 
