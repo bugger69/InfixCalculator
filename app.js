@@ -52,15 +52,13 @@ function solve(s) {//add error handling mechanism too.
                 stack2.push(s[i]);
                 i++;
             }else {
-                let k = process(stack1, stack2);
-                stack1.push(k);
+                process(stack1, stack2);
             }
         }
     }
     stack1.push(parseFloat(s1));
     while(stack2.length > 0 && stack1.length >= 1) {
-        let k = process(stack1, stack2);
-        stack1.push(k);
+        process(stack1, stack2);
     }
     return stack1[stack1.length - 1];
 }
@@ -73,13 +71,13 @@ function process(stack1, stack2) {
     let c = stack2[stack2.length - 1];
     stack2.pop();
     if(c === '+') {
-        return (a + b);
+        stack1.push(a + b);
     } else if (c === '-') {
-        return (a - b);
+        stack1.push(a - b);
     } else if (c === '*') {
-        return (a * b);
+        stack1.push(a * b);
     } else if (c === '/') {
-        return (a / b);
+        stack1.push(a / b);
     } else {
         return NaN;
     }
