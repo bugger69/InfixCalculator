@@ -42,34 +42,25 @@ function solve(s) {//add error handling mechanism too.
     let i = 0;
     let s1 = "";
     while(i != s.length){
-        // console.log(s[i]);
         if (precedence(s[i]) === -1) {
-            // console.log("a");
             s1 += s[i];
             i++;
         } else {
-            // console.log("b", s1);
             if(s1 != "") stack1.push(parseFloat(s1));
             s1 = "";
             if(stack2.length === 0 || (precedence(s[i]) > precedence(stack2[stack2.length - 1]))){
-                // console.log("c", s[i]);
                 stack2.push(s[i]);
                 i++;
             }else {
                 let k = process(stack1, stack2);
                 stack1.push(k);
-                // console.log("d", stack1[stack1.length - 1]);
             }
         }
-        // console.log("Stack1 length: ", stack1.length);
-        // console.log("stack2 length: ", stack2.length); 
     }
     stack1.push(parseFloat(s1));
-    // console.log("b", stack1[stack1.length - 1] ,stack1.length);
     while(stack2.length > 0 && stack1.length >= 1) {
         let k = process(stack1, stack2);
         stack1.push(k);
-        // console.log("d", stack1[stack1.length - 1]);
     }
     return stack1[stack1.length - 1];
 }
