@@ -67,7 +67,7 @@ function solve(s) {//add error handling mechanism too.
                 s1 += s[i];
                 i++;
             } else {
-                if(s1 != "") stack1.push(parseFloat(s1));
+                if(s1 !== "") stack1.push(parseFloat(s1));
                 s1 = "";
                 if(stack2.length === 0 || (precedence(s[i]) > precedence(stack2[stack2.length - 1]))){
                     stack2.push(s[i]);
