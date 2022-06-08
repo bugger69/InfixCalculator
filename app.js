@@ -61,6 +61,12 @@ function solve(s) {//add error handling mechanism too.
         while(stack2.length > 0 && stack1.length >= 1) {
             process(stack1, stack2);
         }
+        if(stack2.length !== 0 || stack1.length !== 1) {
+            throw "Syntax Error!!";
+        }
+        if(isNaN(stack1[stack1.length - 1]) || stack1[stack1.length - 1] === Infinity) {
+            throw "Math Error!!";
+        }
         return stack1[stack1.length - 1];
     } catch (e) {
         return e;
