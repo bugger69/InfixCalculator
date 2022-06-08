@@ -37,30 +37,34 @@ function precedence(c) {
 }
 
 function solve(s) {//add error handling mechanism too.
-    let stack1 = [];
-    let stack2 = [];
-    let i = 0;
-    let s1 = "";
-    while(i != s.length){
-        if (precedence(s[i]) === -1) {
-            s1 += s[i];
-            i++;
-        } else {
-            if(s1 != "") stack1.push(parseFloat(s1));
-            s1 = "";
-            if(stack2.length === 0 || (precedence(s[i]) > precedence(stack2[stack2.length - 1]))){
-                stack2.push(s[i]);
+    try {
+        let stack1 = [];
+        let stack2 = [];
+        let i = 0;
+        let s1 = "";
+        while(i != s.length){
+            if (precedence(s[i]) === -1) {
+                s1 += s[i];
                 i++;
-            }else {
-                process(stack1, stack2);
+            } else {
+                if(s1 != "") stack1.push(parseFloat(s1));
+                s1 = "";
+                if(stack2.length === 0 || (precedence(s[i]) > precedence(stack2[stack2.length - 1]))){
+                    stack2.push(s[i]);
+                    i++;
+                }else {
+                    process(stack1, stack2);
+                }
             }
         }
+        stack1.push(parseFloat(s1));
+        while(stack2.length > 0 && stack1.length >= 1) {
+            process(stack1, stack2);
+        }
+        return stack1[stack1.length - 1];
+    } catch (e) {
+        return e;
     }
-    stack1.push(parseFloat(s1));
-    while(stack2.length > 0 && stack1.length >= 1) {
-        process(stack1, stack2);
-    }
-    return stack1[stack1.length - 1];
 }
 
 function process(stack1, stack2) {
