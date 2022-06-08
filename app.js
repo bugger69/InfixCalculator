@@ -36,6 +36,26 @@ function precedence(c) {
     }
 }
 
+function process(stack1, stack2) {
+    let b = stack1[stack1.length - 1];
+    stack1.pop();
+    let a = stack1[stack1.length - 1];
+    stack1.pop();
+    let c = stack2[stack2.length - 1];
+    stack2.pop();
+    if(c === '+') {
+        stack1.push(a + b);
+    } else if (c === '-') {
+        stack1.push(a - b);
+    } else if (c === '*') {
+        stack1.push(a * b);
+    } else if (c === '/') {
+        stack1.push(a / b);
+    } else {
+        return NaN;
+    }
+}
+
 function solve(s) {//add error handling mechanism too.
     try {
         let stack1 = [];
@@ -73,23 +93,5 @@ function solve(s) {//add error handling mechanism too.
     }
 }
 
-function process(stack1, stack2) {
-    let b = stack1[stack1.length - 1];
-    stack1.pop();
-    let a = stack1[stack1.length - 1];
-    stack1.pop();
-    let c = stack2[stack2.length - 1];
-    stack2.pop();
-    if(c === '+') {
-        stack1.push(a + b);
-    } else if (c === '-') {
-        stack1.push(a - b);
-    } else if (c === '*') {
-        stack1.push(a * b);
-    } else if (c === '/') {
-        stack1.push(a / b);
-    } else {
-        return NaN;
-    }
-}
+
 
