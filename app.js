@@ -56,7 +56,7 @@ function process(stack1, stack2) {
     }
 }
 
-function solve(s) {//add error handling mechanism too.
+function solve(s) {//add brackets.
     try {
         let stack1 = [];
         let stack2 = [];
