@@ -52,7 +52,7 @@ function process(stack1, stack2) {
     } else if (c === '/') {
         stack1.push(a / b);
     } else {
-        return NaN;
+        stack1.push(NaN);
     }
 }
 
