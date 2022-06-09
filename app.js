@@ -63,7 +63,15 @@ function solve(s) {//add brackets.
         let i = 0;
         let s1 = "";
         while(i != s.length){
-            if (precedence(s[i]) === -1) {
+            if(s[i] === '(') {
+                stack2.push(s[i]);
+                i++;
+            } else if (s[i] === ')') {
+                while(stack2[stack2.length - 1] !== '(') {
+                    process();
+                }
+                stack2.pop();
+            } else if (precedence(s[i]) === -1) {
                 s1 += s[i];
                 i++;
             } else {
