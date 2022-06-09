@@ -1,6 +1,6 @@
 const input = document.querySelector("#input");
 
-const submit = document.querySelector(".buttons .row4 button:nth-of-type(3)");
+const submit = document.querySelector(".buttons .row4 button:nth-of-type(4)");
 
 const reset = document.querySelector(".buttons .row0 .reset");
 
@@ -51,26 +51,35 @@ function process(stack1, stack2) {
         stack1.push(a * b);
     } else if (c === '/') {
         stack1.push(a / b);
-    } else {
+    }  else if (c === '(') {
+        stack2.push(c);
+        stack1.push(a);
+        stack1.push(b);
+        return;
+    }else {
         stack1.push(NaN);
     }
 }
 
-function solve(s) {//add brackets.
+function solve(s) {//debug this shit
     try {
         let stack1 = [];
         let stack2 = [];
         let i = 0;
         let s1 = "";
-        while(i != s.length){
+        while(i < s.length){
             if(s[i] === '(') {
                 stack2.push(s[i]);
                 i++;
-            } else if (s[i] === ')') {//problem lies here
-                while(stack2[stack2.length - 1] !== '(') {
-                    process();
+            } else if (s[i] === ')') {
+                if(s1 !== "") stack1.push(parseFloat(s1));
+                s1 = "";
+                if(stack2[stack2.length - 1] === '('){
+                    stack2.pop();
+                    i++;
+                } else {
+                    process(stack1, stack2);
                 }
-                stack2.pop();
             } else if (precedence(s[i]) === -1) {
                 s1 += s[i];
                 i++;
@@ -85,7 +94,7 @@ function solve(s) {//add brackets.
                 }
             }
         }
-        stack1.push(parseFloat(s1));
+        if(s1 !== "") stack1.push(parseFloat(s1));
         while(stack2.length > 0 && stack1.length >= 1) {
             process(stack1, stack2);
         }
