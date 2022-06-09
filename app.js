@@ -66,7 +66,7 @@ function solve(s) {//add brackets.
             if(s[i] === '(') {
                 stack2.push(s[i]);
                 i++;
-            } else if (s[i] === ')') {
+            } else if (s[i] === ')') {//problem lies here
                 while(stack2[stack2.length - 1] !== '(') {
                     process();
                 }
