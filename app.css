@@ -2,3 +2,7 @@
     display : inline-block;
     border: 3px solid black;
 }
+
+section {
+    text-align: center;
+}
