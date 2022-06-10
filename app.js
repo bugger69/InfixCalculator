@@ -31,6 +31,8 @@ function precedence(c) {
             return 2;
         case '/':
             return 2;
+        case '^':
+            return 3;
         default:
             return -1;
     }
@@ -51,12 +53,13 @@ function process(stack1, stack2) {
         stack1.push(a * b);
     } else if (c === '/') {
         stack1.push(a / b);
-    }  else if (c === '(') {
+    } else if (c === '^') {
+        stack1.push(a ** b);
+    } else if (c === '(') {
         stack2.push(c);
         stack1.push(a);
         stack1.push(b);
-        return;
-    }else {
+    } else {
         stack1.push(NaN);
     }
 }
